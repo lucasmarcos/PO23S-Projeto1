@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexao.Conexao;
-import entidades.Conta;
 import entidades.Pessoa;
 
 public class DAOPessoa {
@@ -28,7 +27,7 @@ public class DAOPessoa {
 		return res;
 	}
 	
-	public Pessoa buscarPessoas() {
+	public List<Pessoa> buscarPessoas() {
 		List<Pessoa> lista = new ArrayList<Pessoa>();
 		
 		Conexao c = new Conexao();
@@ -39,11 +38,10 @@ public class DAOPessoa {
 				Pessoa pessoa = new Pessoa();
 				
 				pessoa.setId(rs.getInt("id"));
-				pessoa.setBanco(rs.getString("banco"));
-				pessoa.setSaldo(rs.getDouble("saldo"));
-				pessoa.setNumero(rs.getInt("numero"));
-				
-				// falta pessoa
+				pessoa.setNome(rs.getString("nome"));
+				pessoa.setCidade(rs.getString("cidade"));
+				pessoa.setCpf(rs.getString("cpf"));
+				pessoa.setIdade(rs.getInt("idade"));
 				
 				lista.add(pessoa);
 			}
@@ -55,8 +53,25 @@ public class DAOPessoa {
 		return lista;
 	}
 	
-	public Pessoa buscarContaPorId(int id) {
-		return new Pessoa();
+	public Pessoa buscarPessoaPorId(int id) {
+		Pessoa p = new Pessoa();
+		Conexao c = new Conexao();
+		
+		String sql = "SELECT (id, nome, cidade, cpf, idade) FROM pessoa WHERE id = " + id + ";";
+
+		ResultSet rs = c.executeBusca(sql);
+		try {
+			rs.next();
+			p.setId(rs.getInt("id"));
+			p.setNome(rs.getString("nome"));
+			p.setCidade(rs.getString("cidade"));
+			p.setCpf(rs.getString("cpf"));
+			p.setIdade(rs.getInt("idade"));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return p;
 	}
 	
 	public int atualizarConta(Pessoa pessoa) {
