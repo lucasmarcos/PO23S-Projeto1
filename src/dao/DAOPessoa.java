@@ -79,6 +79,8 @@ public class DAOPessoa {
 	}
 	
 	public int delete(int id) {
+		String sql = "DELETE FROM pessoa WHERE id = " + id + ";";
+		System.out.println(sql);
 		return 0;
 	}
 }

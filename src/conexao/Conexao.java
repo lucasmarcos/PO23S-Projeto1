@@ -17,8 +17,8 @@ public class Conexao {
 
 	public Conexao() {
 		uri = "jdbc:postgresql:projeto1";
-		usuario = "postgres";
-		senha = "aluno";
+		usuario = "lcs";
+		senha = "";
 
 		try {
 			connection = DriverManager.getConnection(uri, usuario, senha);

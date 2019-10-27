@@ -10,8 +10,8 @@ import entidades.Conta;
 public class DAOConta {
 	public int inserir(Conta conta) {
 		Conexao c = new Conexao();
-		String sql = "INSERT INTO conta(pessoa, numero, banco, saldo) VALUES (" +
-				conta.getPessoa().getId() + ", " + conta.getNumero() + ", '" + conta.getBanco() + "', " + conta.getSaldo() + ")";
+		String sql = "INSERT INTO conta (pessoa, numero, banco, saldo) VALUES (" +
+				conta.getPessoa().getId() + ", " + conta.getNumero() + ", '" + conta.getBanco() + "', " + conta.getSaldo() + ");";
 		int res = c.executeSQL(sql);
 		
 		c = new Conexao();
@@ -54,14 +54,36 @@ public class DAOConta {
 	}
 	
 	public Conta buscarContaPorId(int id) {
-		return new Conta();
+		Conta conta = new Conta();
+		Conexao c = new Conexao();
+
+		String sql = "SELECT (id, banco, numero, saldo) FROM conta WHERE id = " + id + ";";
+		System.out.println(sql);
+		
+		ResultSet rs = c.executeBusca(sql);
+		
+		try {
+			rs.next();
+			conta.setId(rs.getInt("id"));
+			conta.setBanco(rs.getString("banco"));
+			conta.setSaldo(rs.getDouble("saldo"));
+			conta.setNumero(rs.getInt("numero"));
+			
+			// falta pessoa
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return conta;
 	}
 	
 	public int atualizarConta(Conta conta) {
 		return 0;
 	}
-	
+
 	public int delete(int id) {
+		String sql = "DELETE FROM conta WHERE id = " + id + ";";
+		System.out.println(sql);
 		return 0;
 	}
 }
