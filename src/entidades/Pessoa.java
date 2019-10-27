@@ -6,7 +6,7 @@ public class Pessoa {
 	private String cpf;
 	private int idade;
 	private String cidade;
-	
+
 	public Pessoa() {}
 
 	public Pessoa(String nome, String cpf, int idade, String cidade) {
@@ -19,11 +19,11 @@ public class Pessoa {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -43,16 +43,26 @@ public class Pessoa {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public String getCpf() {
 		return cpf;
 	}
-	
+
 	public int getIdade() {
 		return idade;
 	}
-	
+
 	public String getCidade() {
 		return cidade;
+	}
+
+	private String formatarCpf() {
+		return cpf;
+	}
+
+	public void mostrar() {
+		System.out.print("[ " + id + " | " + nome + ", " + idade + " anos. | " +
+				formatarCpf() + " | " + cidade + " ]");
+		System.out.println();
 	}
 }

@@ -24,14 +24,14 @@ public class Conta {
 	}
 
 	public Conta() {}
-	
+
 	public Conta(Pessoa pessoa, int numero, String banco, double saldo) {
 		this.pessoa = pessoa;
 		this.numero = numero;
 		this.banco = banco;
 		this.saldo = saldo;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -43,16 +43,22 @@ public class Conta {
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
-	
+
 	public int getNumero() {
 		return numero;
 	}
-	
+
 	public String getBanco() {
 		return banco;
 	}
-	
+
 	public double getSaldo() {
 		return saldo;
+	}
+
+	public void mostrar() {
+		System.out.print("< " + id + " | " + numero + ", " + banco +
+				" | " + saldo + " >");
+		System.out.println();
 	}
 }

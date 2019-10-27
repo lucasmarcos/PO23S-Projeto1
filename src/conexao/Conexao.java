@@ -17,7 +17,7 @@ public class Conexao {
 
 	public Conexao() {
 		uri = "jdbc:postgresql:projeto1";
-		usuario = "lcs";
+		usuario = "lucas";
 		senha = "";
 
 		try {
