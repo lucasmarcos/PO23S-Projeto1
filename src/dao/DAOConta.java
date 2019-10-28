@@ -1,11 +1,10 @@
 package dao;
 
+import conexao.Conexao;
+import entidades.Conta;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import conexao.Conexao;
-import entidades.Conta;
 
 public class DAOConta {
 	public int inserir(Conta conta) {
