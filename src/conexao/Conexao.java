@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Conexao {
-	private String uri;
-	private String usuario;
-	private String senha;
+	private static String uri = "jdbc:postgresql:projeto1";
+	private static String usuario = "lucas";
+	private static String senha = "";
+
 	private Connection connection;
 
 	public Connection getConnection() {
@@ -16,10 +17,6 @@ public class Conexao {
 	}
 
 	public Conexao() {
-		uri = "jdbc:postgresql:projeto1";
-		usuario = "lucas";
-		senha = "";
-
 		try {
 			connection = DriverManager.getConnection(uri, usuario, senha);
 		} catch (Exception e) {
