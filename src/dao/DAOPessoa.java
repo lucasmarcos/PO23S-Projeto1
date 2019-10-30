@@ -73,7 +73,7 @@ public class DAOPessoa {
 		return p;
 	}
 
-	public int atualizarConta(Pessoa pessoa) {
+	public int atualizarPessoa(Pessoa pessoa) {
 		String sql = "UPDATE pessoa (nome, cidade, cpf, idade) WHERE id = " + pessoa.getId();
 		System.out.println(sql);
 		return 0;

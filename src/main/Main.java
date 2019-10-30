@@ -15,6 +15,7 @@ public class Main {
 		DAOPessoa daoPessoa = new DAOPessoa();
 
 		scanner = new Scanner(System.in);
+
 		boolean continuar = true;
 		while (continuar) {
 			System.out.println(" - Menu Principal -");
@@ -88,9 +89,71 @@ public class Main {
 				break;
 
 			case 5:
+				System.out.println("modificar Pessoa com id: ");
+				Pessoa p = daoPessoa.buscarPessoaPorId(scanner.nextInt());
+
+				System.out.print("Nome [" + p.getNome() + "]: ");
+				String novoNome = scanner.next();
+				if(!novoNome.isBlank()) {
+					p.setNome(novoNome);
+				}
+
+				System.out.print("CPF [" + p.getCpf() + "]: ");
+				String novoCPF = scanner.next();
+				if(!novoCPF.isBlank()) {
+					p.setCpf(novoCPF);
+				}
+
+				System.out.print("Idade [" + p.getIdade() + "]: ");
+				String novaIdade = scanner.next();
+				if(!novoCPF.isBlank()) {
+					p.setIdade(Integer.getInteger(novaIdade));
+				}
+
+				System.out.print("Cidade [" + p.getCidade() + "]: ");
+				String novaCidade = scanner.next();
+				if(!novaCidade.isBlank()) {
+					p.setCidade(novaCidade);
+				}
+
+				daoPessoa.atualizarPessoa(p);
+				p = daoPessoa.buscarPessoaPorId(p.getId());
+				p.mostrar();
+
 				break;
 
 			case 6:
+				System.out.println("modificar Pessoa com id: ");
+				Conta c = daoConta.buscarContaPorId(scanner.nextInt());
+
+				System.out.print("Banco [" + c.getBanco() + "]: ");
+				String novoBanco = scanner.next();
+				if(!novoBanco.isBlank()) {
+					c.setBanco(novoBanco);
+				}
+
+				System.out.print("Numero [" + c.getBanco() + "]: ");
+				String novoNumero = scanner.next();
+				if(!novoNumero.isBlank()) {
+					c.setNumero(Integer.getInteger(novoNumero));
+				}
+
+				System.out.print("Saldo [" + c.getSaldo() + "]: ");
+				String novoSaldo = scanner.next();
+				if(!novoSaldo.isBlank()) {
+					c.setSaldo(Double.parseDouble(novoSaldo));
+				}
+
+				System.out.print("Pessoa [ " + c.getPessoa().getId() +"]: ");
+				String novaPessoa = scanner.next();
+				if(!novaPessoa.isBlank()) {
+					c.setPessoa(daoPessoa.buscarPessoaPorId(Integer.getInteger(novaPessoa)));
+				}
+
+				daoConta.atualizarConta(c);
+				c = daoConta.buscarContaPorId(c.getId());
+				c.mostrar();
+
 				break;
 				
 			case 7:
