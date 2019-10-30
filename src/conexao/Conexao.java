@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class Conexao {
 	private static String uri = "jdbc:postgresql:projeto1";
-	private static String usuario = "lucas";
+	private static String usuario = "lcs";
 	private static String senha = "";
 
 	private Connection connection;

@@ -57,8 +57,10 @@ public class Conta {
 	}
 
 	public void mostrar() {
-		System.out.print("< " + id + " | " + numero + ", " + banco +
+		System.out.println("< " + id + " | " + numero + ", " + banco +
 				" | " + saldo + " >");
+		System.out.print("pertencente a: ");
+		pessoa.mostrar();
 		System.out.println();
 	}
 }

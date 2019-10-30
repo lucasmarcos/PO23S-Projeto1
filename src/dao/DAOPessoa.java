@@ -9,7 +9,7 @@ import java.util.List;
 public class DAOPessoa {
 	public int inserir(Pessoa pessoa) {
 		Conexao c = new Conexao();
-		String sql = "INSERT INTO pessoa(nome, cpf, idade, cidade) VALUES ('" +
+		String sql = "INSERT INTO pessoa (nome, cpf, idade, cidade) VALUES ('" +
 			pessoa.getNome() + "', '" + pessoa.getCpf() + "', " + pessoa.getIdade() +
 			", '" + pessoa.getCidade() + "')";
 		int res = c.executeSQL(sql);
@@ -56,7 +56,7 @@ public class DAOPessoa {
 		Pessoa p = new Pessoa();
 		Conexao c = new Conexao();
 
-		String sql = "SELECT (id, nome, cidade, cpf, idade) FROM pessoa WHERE id = " + id + ";";
+		String sql = "SELECT id, nome, cidade, cpf, idade FROM pessoa WHERE id = " + id + ";";
 
 		ResultSet rs = c.executeBusca(sql);
 		try {
@@ -74,12 +74,21 @@ public class DAOPessoa {
 	}
 
 	public int atualizarConta(Pessoa pessoa) {
+		String sql = "UPDATE pessoa (nome, cidade, cpf, idade) WHERE id = " + pessoa.getId();
+		System.out.println(sql);
 		return 0;
 	}
 
 	public int delete(int id) {
 		String sql = "DELETE FROM pessoa WHERE id = " + id + ";";
-		System.out.println(sql);
+		Conexao c = new Conexao();
+
+		try {
+			c.executeSQL(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return 0;
 	}
 }

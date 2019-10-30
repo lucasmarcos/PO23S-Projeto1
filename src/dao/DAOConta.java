@@ -39,8 +39,9 @@ public class DAOConta {
 				conta.setBanco(rs.getString("banco"));
 				conta.setSaldo(rs.getDouble("saldo"));
 				conta.setNumero(rs.getInt("numero"));
-
-				// falta pessoa
+				
+				DAOPessoa dao = new DAOPessoa();
+				conta.setPessoa(dao.buscarPessoaPorId(rs.getInt("pessoa")));
 
 				lista.add(conta);
 			}
@@ -55,7 +56,7 @@ public class DAOConta {
 		Conta conta = new Conta();
 		Conexao c = new Conexao();
 
-		String sql = "SELECT (id, banco, numero, saldo) FROM conta WHERE id = " + id + ";";
+		String sql = "SELECT id, banco, numero, saldo FROM conta WHERE id = " + id + ";";
 		System.out.println(sql);
 
 		ResultSet rs = c.executeBusca(sql);
@@ -66,8 +67,9 @@ public class DAOConta {
 			conta.setBanco(rs.getString("banco"));
 			conta.setSaldo(rs.getDouble("saldo"));
 			conta.setNumero(rs.getInt("numero"));
-
-			// falta pessoa
+			
+			DAOPessoa dao = new DAOPessoa();
+			conta.setPessoa(dao.buscarPessoaPorId(rs.getInt("pessoa")));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -76,12 +78,21 @@ public class DAOConta {
 	}
 
 	public int atualizarConta(Conta conta) {
+		String sql = "UPDATE conta (banco, saldo, numero, pessoa) WHERE id = " + conta.getId();
+		System.out.println(sql);
 		return 0;
 	}
 
 	public int delete(int id) {
 		String sql = "DELETE FROM conta WHERE id = " + id + ";";
-		System.out.println(sql);
+		Conexao c = new Conexao();
+
+		try {
+			c.executeSQL(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return 0;
 	}
 }
