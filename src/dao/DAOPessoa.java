@@ -30,7 +30,7 @@ public class DAOPessoa {
 		List<Pessoa> lista = new ArrayList<Pessoa>();
 
 		Conexao c = new Conexao();
-		ResultSet rs = c.executeBusca("SELECT * FROM pessoa;");
+		ResultSet rs = c.executeBusca("SELECT id, nome, cidade, cpf, idade FROM pessoa;");
 
 		try {
 			while(rs.next()) {
@@ -74,8 +74,13 @@ public class DAOPessoa {
 	}
 
 	public int atualizarPessoa(Pessoa pessoa) {
-		String sql = "UPDATE pessoa (nome, cidade, cpf, idade) WHERE id = " + pessoa.getId();
-		System.out.println(sql);
+		Conexao c = new Conexao();
+		String sql = "UPDATE pessoa SET nome = '" + pessoa.getNome() +
+			"', cidade = '" + pessoa.getCidade() +
+			"', cpf = '" + pessoa.getCpf() +
+			"', idade = " + pessoa.getIdade() +
+			" WHERE id = " + pessoa.getId();
+		c.executeSQL(sql);
 		return 0;
 	}
 

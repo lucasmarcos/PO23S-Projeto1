@@ -15,6 +15,7 @@ public class Main {
 		DAOPessoa daoPessoa = new DAOPessoa();
 
 		scanner = new Scanner(System.in);
+		scanner.useDelimiter("\\n");
 
 		boolean continuar = true;
 		while (continuar) {
@@ -95,24 +96,28 @@ public class Main {
 				System.out.print("Nome [" + p.getNome() + "]: ");
 				String novoNome = scanner.next();
 				if(!novoNome.isBlank()) {
+					System.out.println(novoNome);
 					p.setNome(novoNome);
 				}
 
 				System.out.print("CPF [" + p.getCpf() + "]: ");
 				String novoCPF = scanner.next();
 				if(!novoCPF.isBlank()) {
+					System.out.println(novoCPF);
 					p.setCpf(novoCPF);
 				}
 
 				System.out.print("Idade [" + p.getIdade() + "]: ");
 				String novaIdade = scanner.next();
-				if(!novoCPF.isBlank()) {
-					p.setIdade(Integer.getInteger(novaIdade));
+				if(!novaIdade.isBlank()) {
+					System.out.println(novaIdade);
+					p.setIdade(Integer.parseInt(novaIdade));
 				}
 
 				System.out.print("Cidade [" + p.getCidade() + "]: ");
 				String novaCidade = scanner.next();
 				if(!novaCidade.isBlank()) {
+					System.out.println(novaCidade);
 					p.setCidade(novaCidade);
 				}
 
@@ -123,31 +128,35 @@ public class Main {
 				break;
 
 			case 6:
-				System.out.println("modificar Pessoa com id: ");
+				System.out.println("modificar Conta com id: ");
 				Conta c = daoConta.buscarContaPorId(scanner.nextInt());
 
 				System.out.print("Banco [" + c.getBanco() + "]: ");
 				String novoBanco = scanner.next();
 				if(!novoBanco.isBlank()) {
+					System.out.println(novoBanco);
 					c.setBanco(novoBanco);
 				}
 
-				System.out.print("Numero [" + c.getBanco() + "]: ");
+				System.out.print("Numero [" + c.getNumero() + "]: ");
 				String novoNumero = scanner.next();
 				if(!novoNumero.isBlank()) {
+					System.out.println(novoNumero);
 					c.setNumero(Integer.getInteger(novoNumero));
 				}
 
 				System.out.print("Saldo [" + c.getSaldo() + "]: ");
 				String novoSaldo = scanner.next();
 				if(!novoSaldo.isBlank()) {
+					System.out.println(novoSaldo);
 					c.setSaldo(Double.parseDouble(novoSaldo));
 				}
 
 				System.out.print("Pessoa [ " + c.getPessoa().getId() +"]: ");
 				String novaPessoa = scanner.next();
 				if(!novaPessoa.isBlank()) {
-					c.setPessoa(daoPessoa.buscarPessoaPorId(Integer.getInteger(novaPessoa)));
+					System.out.println(novaPessoa);
+					c.setPessoa(daoPessoa.buscarPessoaPorId(Integer.parseInt(novaPessoa)));
 				}
 
 				daoConta.atualizarConta(c);

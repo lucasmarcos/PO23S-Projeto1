@@ -29,7 +29,7 @@ public class DAOConta {
 		List<Conta> lista = new ArrayList<Conta>();
 
 		Conexao c = new Conexao();
-		ResultSet rs = c.executeBusca("SELECT * FROM conta;");
+		ResultSet rs = c.executeBusca("SELECT id, banco, saldo, numero, pessoa FROM conta;");
 
 		try {
 			while(rs.next()) {
@@ -56,9 +56,7 @@ public class DAOConta {
 		Conta conta = new Conta();
 		Conexao c = new Conexao();
 
-		String sql = "SELECT id, banco, numero, saldo FROM conta WHERE id = " + id + ";";
-		System.out.println(sql);
-
+		String sql = "SELECT id, banco, numero, saldo, pessoa FROM conta WHERE id = " + id + ";";
 		ResultSet rs = c.executeBusca(sql);
 
 		try {
@@ -78,8 +76,15 @@ public class DAOConta {
 	}
 
 	public int atualizarConta(Conta conta) {
-		String sql = "UPDATE conta (banco, saldo, numero, pessoa) WHERE id = " + conta.getId();
+		Conexao c = new Conexao();
+		String sql = "UPDATE conta SET banco = '" + conta.getBanco() +
+			"', saldo = " + conta.getSaldo() +
+			", numero = " + conta.getNumero() +
+			", pessoa = " + conta.getPessoa().getId() +
+			" WHERE id = " + conta.getId();
+
 		System.out.println(sql);
+		c.executeSQL(sql);
 		return 0;
 	}
 
