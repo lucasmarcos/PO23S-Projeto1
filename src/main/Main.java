@@ -15,7 +15,7 @@ public class Main {
 		DAOPessoa daoPessoa = new DAOPessoa();
 
 		scanner = new Scanner(System.in);
-		scanner.useDelimiter("\\n");
+		// scanner.useDelimiter("\\n");
 
 		boolean continuar = true;
 		while (continuar) {
@@ -95,28 +95,28 @@ public class Main {
 
 				System.out.print("Nome [" + p.getNome() + "]: ");
 				String novoNome = scanner.next();
-				if(!novoNome.isBlank()) {
+				if(!novoNome.isEmpty()) {
 					System.out.println(novoNome);
 					p.setNome(novoNome);
 				}
 
 				System.out.print("CPF [" + p.getCpf() + "]: ");
 				String novoCPF = scanner.next();
-				if(!novoCPF.isBlank()) {
+				if(!novoCPF.isEmpty()) {
 					System.out.println(novoCPF);
 					p.setCpf(novoCPF);
 				}
 
 				System.out.print("Idade [" + p.getIdade() + "]: ");
 				String novaIdade = scanner.next();
-				if(!novaIdade.isBlank()) {
+				if(!novaIdade.isEmpty()) {
 					System.out.println(novaIdade);
 					p.setIdade(Integer.parseInt(novaIdade));
 				}
 
 				System.out.print("Cidade [" + p.getCidade() + "]: ");
 				String novaCidade = scanner.next();
-				if(!novaCidade.isBlank()) {
+				if(!novaCidade.isEmpty()) {
 					System.out.println(novaCidade);
 					p.setCidade(novaCidade);
 				}
@@ -133,28 +133,28 @@ public class Main {
 
 				System.out.print("Banco [" + c.getBanco() + "]: ");
 				String novoBanco = scanner.next();
-				if(!novoBanco.isBlank()) {
+				if(!novoBanco.isEmpty()) {
 					System.out.println(novoBanco);
 					c.setBanco(novoBanco);
 				}
 
 				System.out.print("Numero [" + c.getNumero() + "]: ");
 				String novoNumero = scanner.next();
-				if(!novoNumero.isBlank()) {
+				if(!novoNumero.isEmpty()) {
 					System.out.println(novoNumero);
 					c.setNumero(Integer.getInteger(novoNumero));
 				}
 
 				System.out.print("Saldo [" + c.getSaldo() + "]: ");
 				String novoSaldo = scanner.next();
-				if(!novoSaldo.isBlank()) {
+				if(!novoSaldo.isEmpty()) {
 					System.out.println(novoSaldo);
 					c.setSaldo(Double.parseDouble(novoSaldo));
 				}
 
 				System.out.print("Pessoa [ " + c.getPessoa().getId() +"]: ");
 				String novaPessoa = scanner.next();
-				if(!novaPessoa.isBlank()) {
+				if(!novaPessoa.isEmpty()) {
 					System.out.println(novaPessoa);
 					c.setPessoa(daoPessoa.buscarPessoaPorId(Integer.parseInt(novaPessoa)));
 				}
@@ -174,7 +174,47 @@ public class Main {
 				System.out.println("remover Conta com id: ");
 				daoConta.delete(scanner.nextInt());
 				break;
-				
+
+			case 9:
+				System.out.println("pesquisar Pessoa por: ");
+				System.out.println("[ 1 ] ID, [ 2 ] Nome, [ 3 ] CPF, [ 4 ] Cidade");
+				int filto_pessoa = scanner.nextInt();
+				switch(filto_pessoa) {
+				case 1:
+					break;
+
+				case 2:
+					break;
+
+				case 3:
+					break;
+
+				case 4:
+					break;
+				}
+
+				break;
+
+			case 10:
+				System.out.println("pesquisar Conta por: ");
+				System.out.println("[ 1 ] ID, [ 2 ] Banco, [ 3 ] Numero, [ 4 ] ID_Pessoa");
+				int filto_conta = scanner.nextInt();
+				switch(filto_conta) {
+				case 1:
+					break;
+
+				case 2:
+					break;
+
+				case 3:
+					break;
+
+				case 4:
+					break;
+				}
+
+				break;
+
 			default:
 				System.out.println("FIM");
 				continuar = false;
