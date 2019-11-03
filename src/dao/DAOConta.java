@@ -2,6 +2,7 @@ package dao;
 
 import conexao.Conexao;
 import entidades.Conta;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,5 +100,33 @@ public class DAOConta {
 		}
 
 		return 0;
+	}
+	
+	public List<Conta> pesquisar(String campo, String parametro) {
+		List<Conta> lista = new ArrayList<Conta>();
+		
+		String sql = "SELECT id, banco, numero, saldo, pessoa FROM conta WHERE " + campo + " ILIKE '%" + parametro + "%';";
+		Conexao c = new Conexao();
+		ResultSet rs = c.executeBusca(sql);
+
+		try {
+			while(rs.next()) {
+				Conta conta = new Conta();
+
+				conta.setId(rs.getInt("id"));
+				conta.setBanco(rs.getString("banco"));
+				conta.setSaldo(rs.getDouble("saldo"));
+				conta.setNumero(rs.getInt("numero"));
+				
+				DAOPessoa dao = new DAOPessoa();
+				conta.setPessoa(dao.buscarPessoaPorId(rs.getInt("pessoa")));
+
+				lista.add(conta);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
 	}
 }

@@ -96,4 +96,30 @@ public class DAOPessoa {
 
 		return 0;
 	}
+
+	public List<Pessoa> pesquisar(String campo, String parametro) {
+		List<Pessoa> lista = new ArrayList<Pessoa>();
+		
+		String sql = "SELECT id, nome, cidade, cpf, idade FROM pessoa WHERE " + campo + " ILIKE '%" + parametro + "%';";
+		Conexao c = new Conexao();
+		ResultSet rs = c.executeBusca(sql);
+
+		try {
+			while(rs.next()) {
+				Pessoa pessoa = new Pessoa();
+
+				pessoa.setId(rs.getInt("id"));
+				pessoa.setNome(rs.getString("nome"));
+				pessoa.setCidade(rs.getString("cidade"));
+				pessoa.setCpf(rs.getString("cpf"));
+				pessoa.setIdade(rs.getInt("idade"));
+
+				lista.add(pessoa);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
 }
