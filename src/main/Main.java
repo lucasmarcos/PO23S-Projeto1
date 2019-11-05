@@ -105,7 +105,7 @@ public class Main {
 		String novoNumero = scanner.next();
 		if(!novoNumero.isEmpty()) {
 			System.out.println(novoNumero);
-			c.setNumero(Integer.getInteger(novoNumero));
+			c.setNumero(Integer.parseInt(novoNumero));
 		}
 
 		System.out.print("Saldo [" + c.getSaldo() + "]: ");
@@ -180,7 +180,7 @@ public class Main {
 		daoPessoa = new DAOPessoa();
 		scanner = new Scanner(System.in);
 		
-		// scanner.useDelimiter("\\n");
+		scanner.useDelimiter("\\n");
 
 		boolean continuar = true;
 		while (continuar) {
