@@ -20,7 +20,8 @@ public class Conexao {
 		try {
 			connection = DriverManager.getConnection(uri, usuario, senha);
 		} catch (Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel conectar ao banco de dados. " + (mensagem == null ? "" : mensagem));
 		}
 	}
 
@@ -31,7 +32,9 @@ public class Conexao {
 			connection.close();
 			return res;
 		} catch (Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: ao executar alteracao no banco de dados. " + (mensagem == null ? "" : mensagem));
+			// System.out.println(sql);
 			return 0;
 		}
 	}
@@ -43,7 +46,9 @@ public class Conexao {
 			connection.close();
 			return res;
 		} catch (Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: a busca não pode ser executada. " + (mensagem == null ? "" : mensagem));
+			// System.out.println(sql);
 			return null;
 		}
 	}

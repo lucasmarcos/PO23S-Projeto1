@@ -20,7 +20,8 @@ public class DAOPessoa {
 			rs.next();
 			pessoa.setId(rs.getInt(1));
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel inserir a nova pessoa. " + (mensagem == null ? "" : mensagem));
 		}
 
 		return res;
@@ -45,9 +46,9 @@ public class DAOPessoa {
 				lista.add(pessoa);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel listar todas as pessoas. " + (mensagem == null ? "" : mensagem));
 		}
-
 
 		return lista;
 	}
@@ -67,7 +68,8 @@ public class DAOPessoa {
 			p.setCpf(rs.getString("cpf"));
 			p.setIdade(rs.getInt("idade"));
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel encontrar a pessoa de id " + id + ". " + (mensagem == null ? "" : mensagem));
 		}
 
 		return p;
@@ -91,7 +93,8 @@ public class DAOPessoa {
 		try {
 			c.executeSQL(sql);
 		} catch (Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel remover a pessoa de id " + id + ". " + (mensagem == null ? "" : mensagem));
 		}
 
 		return 0;
@@ -99,7 +102,7 @@ public class DAOPessoa {
 
 	public List<Pessoa> pesquisar(String campo, String parametro) {
 		List<Pessoa> lista = new ArrayList<Pessoa>();
-		
+
 		String sql = "SELECT id, nome, cidade, cpf, idade FROM pessoa WHERE " + campo + " ILIKE '%" + parametro + "%';";
 		Conexao c = new Conexao();
 		ResultSet rs = c.executeBusca(sql);
@@ -117,7 +120,8 @@ public class DAOPessoa {
 				lista.add(pessoa);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: pesquisa de pessoas nao concluida com sucesso. " + (mensagem == null ? "" : mensagem));
 		}
 
 		return lista;

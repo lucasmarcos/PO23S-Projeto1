@@ -20,7 +20,8 @@ public class DAOConta {
 			rs.next();
 			conta.setId(rs.getInt(1));
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: a nova conta não pode ser inserida. " + (mensagem == null ? "" : mensagem));
 		}
 
 		return res;
@@ -40,14 +41,15 @@ public class DAOConta {
 				conta.setBanco(rs.getString("banco"));
 				conta.setSaldo(rs.getDouble("saldo"));
 				conta.setNumero(rs.getInt("numero"));
-				
+
 				DAOPessoa dao = new DAOPessoa();
 				conta.setPessoa(dao.buscarPessoaPorId(rs.getInt("pessoa")));
 
 				lista.add(conta);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: ao lista todas as contas. " + (mensagem == null ? "" : mensagem));
 		}
 
 		return lista;
@@ -66,11 +68,12 @@ public class DAOConta {
 			conta.setBanco(rs.getString("banco"));
 			conta.setSaldo(rs.getDouble("saldo"));
 			conta.setNumero(rs.getInt("numero"));
-			
+
 			DAOPessoa dao = new DAOPessoa();
 			conta.setPessoa(dao.buscarPessoaPorId(rs.getInt("pessoa")));
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel retornar a conta de id " + id + ". " + (mensagem == null ? "" : mensagem));
 		}
 
 		return conta;
@@ -96,15 +99,16 @@ public class DAOConta {
 		try {
 			c.executeSQL(sql);
 		} catch (Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: nao foi possivel deletar a pessoa de id " + id + ". " + (mensagem == null ? "" : mensagem));
 		}
 
 		return 0;
 	}
-	
+
 	public List<Conta> pesquisar(String campo, String parametro) {
 		List<Conta> lista = new ArrayList<Conta>();
-		
+
 		String sql = "SELECT id, banco, numero, saldo, pessoa FROM conta WHERE " + campo + " ILIKE '%" + parametro + "%';";
 		Conexao c = new Conexao();
 		ResultSet rs = c.executeBusca(sql);
@@ -117,14 +121,15 @@ public class DAOConta {
 				conta.setBanco(rs.getString("banco"));
 				conta.setSaldo(rs.getDouble("saldo"));
 				conta.setNumero(rs.getInt("numero"));
-				
+
 				DAOPessoa dao = new DAOPessoa();
 				conta.setPessoa(dao.buscarPessoaPorId(rs.getInt("pessoa")));
 
 				lista.add(conta);
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			String mensagem = e.getMessage();
+			System.out.println("ERRO: pesquisa nao executada. " + (mensagem == null ? "" : mensagem));
 		}
 
 		return lista;
