@@ -19,16 +19,16 @@ public class Main {
 		Pessoa pessoa = new Pessoa();
 
 		System.out.print("Nome: ");
-		pessoa.setNome(scanner.next());
+		pessoa.setNome(scanner.nextLine());
 
 		System.out.print("CPF: ");
-		pessoa.setCpf(scanner.next());
+		pessoa.setCpf(scanner.nextLine());
 
 		System.out.print("Idade: ");
-		pessoa.setIdade(scanner.nextInt());
+		pessoa.setIdade(Integer.parseInt(scanner.nextLine()));
 
 		System.out.print("Cidade: ");
-		pessoa.setCidade(scanner.next());
+		pessoa.setCidade(scanner.nextLine());
 
 		daoPessoa.inserir(pessoa);
 		pessoa.mostrar();
@@ -38,16 +38,16 @@ public class Main {
 		Conta conta = new Conta();
 
 		System.out.print("Banco: ");
-		conta.setBanco(scanner.next());
+		conta.setBanco(scanner.nextLine());
 
 		System.out.print("Numero: ");
-		conta.setNumero(scanner.nextInt());
+		conta.setNumero(Integer.parseInt(scanner.nextLine()));
 
 		System.out.print("Saldo: ");
-		conta.setSaldo(scanner.nextDouble());
+		conta.setSaldo(Double.parseDouble(scanner.nextLine()));
 
 		System.out.print("Pessoa: ");
-		conta.setPessoa(daoPessoa.buscarPessoaPorId(scanner.nextInt()));
+		conta.setPessoa(daoPessoa.buscarPessoaPorId(Integer.parseInt(scanner.nextLine())));
 
 		daoConta.inserir(conta);
 		conta.mostrar();
@@ -55,32 +55,34 @@ public class Main {
 
 	private static void atualizarPessoa() {
 		System.out.print("modificar Pessoa com id: ");
-		Pessoa p = daoPessoa.buscarPessoaPorId(scanner.nextInt());
+		Pessoa p = daoPessoa.buscarPessoaPorId(Integer.parseInt(scanner.nextLine()));
 		System.out.println();
 
+		if(p.getNome() == null) return;
+		
 		System.out.print("Nome [" + p.getNome() + "]: ");
-		String novoNome = scanner.next();
+		String novoNome = scanner.nextLine();
 		if(!novoNome.isEmpty()) {
 			System.out.println(novoNome);
 			p.setNome(novoNome);
 		}
 
 		System.out.print("CPF [" + p.getCpf() + "]: ");
-		String novoCPF = scanner.next();
+		String novoCPF = scanner.nextLine();
 		if(!novoCPF.isEmpty()) {
 			System.out.println(novoCPF);
 			p.setCpf(novoCPF);
 		}
 
 		System.out.print("Idade [" + p.getIdade() + "]: ");
-		String novaIdade = scanner.next();
+		String novaIdade = scanner.nextLine();
 		if(!novaIdade.isEmpty()) {
 			System.out.println(novaIdade);
 			p.setIdade(Integer.parseInt(novaIdade));
 		}
 
 		System.out.print("Cidade [" + p.getCidade() + "]: ");
-		String novaCidade = scanner.next();
+		String novaCidade = scanner.nextLine();
 		if(!novaCidade.isEmpty()) {
 			System.out.println(novaCidade);
 			p.setCidade(novaCidade);
@@ -93,32 +95,34 @@ public class Main {
 
 	private static void atualizarConta() {
 		System.out.print("modificar Conta com id: ");
-		Conta c = daoConta.buscarContaPorId(scanner.nextInt());
+		Conta c = daoConta.buscarContaPorId(Integer.parseInt(scanner.nextLine()));
 		System.out.println();
 
+		if(c.getBanco() == null) return;
+		
 		System.out.print("Banco [" + c.getBanco() + "]: ");
-		String novoBanco = scanner.next();
+		String novoBanco = scanner.nextLine();
 		if(!novoBanco.isEmpty()) {
 			System.out.println(novoBanco);
 			c.setBanco(novoBanco);
 		}
 
 		System.out.print("Numero [" + c.getNumero() + "]: ");
-		String novoNumero = scanner.next();
+		String novoNumero = scanner.nextLine();
 		if(!novoNumero.isEmpty()) {
 			System.out.println(novoNumero);
 			c.setNumero(Integer.parseInt(novoNumero));
 		}
 
 		System.out.print("Saldo [" + c.getSaldo() + "]: ");
-		String novoSaldo = scanner.next();
+		String novoSaldo = scanner.nextLine();
 		if(!novoSaldo.isEmpty()) {
 			System.out.println(novoSaldo);
 			c.setSaldo(Double.parseDouble(novoSaldo));
 		}
 
 		System.out.print("Pessoa [ " + c.getPessoa().getId() +"]: ");
-		String novaPessoa = scanner.next();
+		String novaPessoa = scanner.nextLine();
 		if(!novaPessoa.isEmpty()) {
 			System.out.println(novaPessoa);
 			c.setPessoa(daoPessoa.buscarPessoaPorId(Integer.parseInt(novaPessoa)));
@@ -134,16 +138,18 @@ public class Main {
 
 		System.out.println("pesquisar Pessoa por: ");
 		System.out.print("[ 1 ] Nome, [ 2 ] Cidade: ");
-		int filto_pessoa = scanner.nextInt();
+		int filto_pessoa = Integer.parseInt(scanner.nextLine());
+		System.out.println();
+		
 		System.out.print("Filtro: ");
 
 		switch(filto_pessoa) {
 		case 1:
-			pessoas = daoPessoa.pesquisar("nome", scanner.next());
+			pessoas = daoPessoa.pesquisar("nome", scanner.nextLine());
 			break;
 
 		case 2:
-			pessoas = daoPessoa.pesquisar("cidade", scanner.next());
+			pessoas = daoPessoa.pesquisar("cidade", scanner.nextLine());
 			break;
 
 		default:
@@ -162,16 +168,16 @@ public class Main {
 
 		System.out.println("pesquisar Conta por: ");
 		System.out.print("[ 1 ] Banco, [ 2 ] ID_Pessoa: ");
-		int filto_conta = scanner.nextInt();
+		int filto_conta = Integer.parseInt(scanner.nextLine());
 		System.out.println();
 
 		switch(filto_conta) {
 		case 1:
-			contas = daoConta.pesquisar("banco", scanner.next());
+			contas = daoConta.pesquisar("banco", scanner.nextLine());
 			break;
 
 		case 2:
-			contas = daoConta.pesquisar("pessoa", scanner.next());
+			contas = daoConta.pesquisar("pessoa", scanner.nextLine());
 			break;
 
 		default:
@@ -187,8 +193,6 @@ public class Main {
 		daoConta = new DAOConta();
 		daoPessoa = new DAOPessoa();
 		scanner = new Scanner(System.in);
-
-		scanner.useDelimiter("\\n");
 
 		boolean continuar = true;
 		while (continuar) {
@@ -212,7 +216,7 @@ public class Main {
 
 			int opcao;
 			try {
-				opcao = Integer.parseInt(scanner.next());
+				opcao = Integer.parseInt(scanner.nextLine());
 			} catch(Exception e) {
 				System.out.println("Insira um numero valido");
 				opcao = -1;
@@ -249,13 +253,13 @@ public class Main {
 
 			case 7:
 				System.out.print("remover Pessoa com id: ");
-				daoPessoa.delete(scanner.nextInt());
+				daoPessoa.delete(Integer.parseInt(scanner.nextLine()));
 				System.out.println();
 				break;
 
 			case 8:
 				System.out.print("remover Conta com id: ");
-				daoConta.delete(scanner.nextInt());
+				daoConta.delete(Integer.parseInt(scanner.nextLine()));
 				System.out.println();
 				break;
 
