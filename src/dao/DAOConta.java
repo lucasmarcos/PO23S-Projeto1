@@ -21,7 +21,7 @@ public class DAOConta {
 			conta.setId(rs.getInt(1));
 		} catch(Exception e) {
 			String mensagem = e.getMessage();
-			System.out.println("ERRO: a nova conta não pode ser inserida. " + (mensagem == null ? "" : mensagem));
+			System.out.println("ERRO: a nova conta nao pode ser inserida. " + (mensagem == null ? "" : mensagem));
 		}
 
 		return res;
@@ -87,7 +87,7 @@ public class DAOConta {
 			", pessoa = " + conta.getPessoa().getId() +
 			" WHERE id = " + conta.getId();
 
-		System.out.println(sql);
+		// System.out.println(sql);
 		c.executeSQL(sql);
 		return 0;
 	}

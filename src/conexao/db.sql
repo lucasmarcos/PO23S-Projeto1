@@ -1,4 +1,4 @@
-﻿DROP TABLE conta;
+DROP TABLE conta;
 DROP TABLE pessoa;
 
 CREATE TABLE pessoa (
