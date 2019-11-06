@@ -17,7 +17,7 @@ public class Main {
 
 	private static void inserirPessoa() {
 		Pessoa pessoa = new Pessoa();
-				
+
 		System.out.print("Nome: ");
 		pessoa.setNome(scanner.next());
 
@@ -29,14 +29,14 @@ public class Main {
 
 		System.out.print("Cidade: ");
 		pessoa.setCidade(scanner.next());
-		
+
 		daoPessoa.inserir(pessoa);
 		pessoa.mostrar();
 	}
 
 	private static void inserirConta() {
 		Conta conta = new Conta();
-				
+
 		System.out.print("Banco: ");
 		conta.setBanco(scanner.next());
 
@@ -48,14 +48,15 @@ public class Main {
 
 		System.out.print("Pessoa: ");
 		conta.setPessoa(daoPessoa.buscarPessoaPorId(scanner.nextInt()));
-		
+
 		daoConta.inserir(conta);
 		conta.mostrar();
 	}
 
 	private static void atualizarPessoa() {
-		System.out.println("modificar Pessoa com id: ");
+		System.out.print("modificar Pessoa com id: ");
 		Pessoa p = daoPessoa.buscarPessoaPorId(scanner.nextInt());
+		System.out.println();
 
 		System.out.print("Nome [" + p.getNome() + "]: ");
 		String novoNome = scanner.next();
@@ -91,8 +92,9 @@ public class Main {
 	}
 
 	private static void atualizarConta() {
-		System.out.println("modificar Conta com id: ");
+		System.out.print("modificar Conta com id: ");
 		Conta c = daoConta.buscarContaPorId(scanner.nextInt());
+		System.out.println();
 
 		System.out.print("Banco [" + c.getBanco() + "]: ");
 		String novoBanco = scanner.next();
@@ -131,8 +133,10 @@ public class Main {
 		List<Pessoa> pessoas;
 
 		System.out.println("pesquisar Pessoa por: ");
-		System.out.println("[ 1 ] Nome, [ 2 ] Cidade");
+		System.out.print("[ 1 ] Nome, [ 2 ] Cidade: ");
 		int filto_pessoa = scanner.nextInt();
+		System.out.print("Filtro: ");
+
 		switch(filto_pessoa) {
 		case 1:
 			pessoas = daoPessoa.pesquisar("nome", scanner.next());
@@ -141,11 +145,13 @@ public class Main {
 		case 2:
 			pessoas = daoPessoa.pesquisar("cidade", scanner.next());
 			break;
-		
+
 		default:
 			pessoas = new ArrayList<Pessoa>();
 			break;
 		}
+
+		System.out.println();
 
 		for(int i = 0; i < pessoas.size(); i++)
 			pessoas.get(i).mostrar();
@@ -155,8 +161,10 @@ public class Main {
 		List<Conta> contas;
 
 		System.out.println("pesquisar Conta por: ");
-		System.out.println("[ 1 ] Banco, [ 2 ] ID_Pessoa");
+		System.out.print("[ 1 ] Banco, [ 2 ] ID_Pessoa: ");
 		int filto_conta = scanner.nextInt();
+		System.out.println();
+
 		switch(filto_conta) {
 		case 1:
 			contas = daoConta.pesquisar("banco", scanner.next());
@@ -165,7 +173,7 @@ public class Main {
 		case 2:
 			contas = daoConta.pesquisar("pessoa", scanner.next());
 			break;
-		
+
 		default:
 			contas = new ArrayList<Conta>();
 			break;
@@ -179,7 +187,7 @@ public class Main {
 		daoConta = new DAOConta();
 		daoPessoa = new DAOPessoa();
 		scanner = new Scanner(System.in);
-		
+
 		scanner.useDelimiter("\\n");
 
 		boolean continuar = true;
@@ -202,7 +210,14 @@ public class Main {
 			System.out.println();
 			System.out.println("[ 0 ]: Sair");
 
-			int opcao = scanner.nextInt();
+			int opcao;
+			try {
+				opcao = Integer.parseInt(scanner.next());
+			} catch(Exception e) {
+				System.out.println("Insira um numero valido");
+				opcao = -1;
+			}
+
 			switch (opcao) {
 			case 1:
 				inserirPessoa();
@@ -231,15 +246,17 @@ public class Main {
 			case 6:
 				atualizarConta();
 				break;
-				
+
 			case 7:
-				System.out.println("remover Pessoa com id: ");
+				System.out.print("remover Pessoa com id: ");
 				daoPessoa.delete(scanner.nextInt());
+				System.out.println();
 				break;
 
 			case 8:
-				System.out.println("remover Conta com id: ");
+				System.out.print("remover Conta com id: ");
 				daoConta.delete(scanner.nextInt());
+				System.out.println();
 				break;
 
 			case 9:
@@ -250,7 +267,7 @@ public class Main {
 				pesquisarConta();
 				break;
 
-			default:
+			case 0:
 				System.out.println("FIM");
 				continuar = false;
 				break;
